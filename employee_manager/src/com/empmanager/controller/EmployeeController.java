@@ -1,5 +1,6 @@
 package com.empmanager.controller;
 
+import java.text.ParseException;
 import java.util.List;
 
 import com.empmanager.common.MainController;
@@ -33,8 +34,14 @@ public class EmployeeController implements MainController{
 	}
 	@Override
 	public void insertEmployee() {
-		// TODO Auto-generated method stub
-		
+		Employee employee = null;
+		try {
+			employee = mv.insertEmployee();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		int result = service.insertEmployee(employee);
+		mv.printMsg(result > 0 ? "등록성공 :)" : "등록실패 :(");
 	}
 	@Override
 	public void updateEmployee() {

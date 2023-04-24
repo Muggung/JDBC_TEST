@@ -1,5 +1,8 @@
 package com.empmanager.view;
 
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Scanner;
 
@@ -38,10 +41,19 @@ public class MainView {
 		}
 	}
 	
+	public void printMsg(String msg) {
+		System.out.println("===== 시스템 메세지 =====");
+		System.out.println(msg);
+	}
+	
 	public void printEmployee(List<Employee> employee) {
 		System.out.println("===== 사원 조회 =====");
-		employee.forEach(e -> System.out.println(e));
-		System.out.println("==================");
+		if(employee.isEmpty()) {
+			System.out.println("===== 조회된 사원이 없습니다 :( =====");
+		}else if(!employee.isEmpty()) {
+			employee.forEach(e -> System.out.println(e));
+			System.out.println("==================");
+		}
 	}
 	
 	public void checkEmployeeMenu() {
@@ -76,5 +88,36 @@ public class MainView {
 				default : System.out.println("메뉴에 있는 번호를 입력해주세요.");
 			}
 		}
+	}
+	
+	public Employee insertEmployee() throws ParseException{
+		Employee e = new Employee();
+		
+		System.out.println("===== 사원 등록 =====");
+		sc.nextLine();
+		System.out.print("사원 아이디 : ");
+		e.setEmp_Id(sc.nextLine());
+		System.out.print("사원 이름 : ");
+		e.setEmp_Name(sc.nextLine());
+		System.out.print("주민 번호 : ");
+		e.setEmp_No(sc.nextLine());
+		System.out.print("이메일 : ");
+		e.setEmail(sc.nextLine());
+		System.out.print("휴대폰 : ");
+		e.setPhone(sc.nextLine());
+		System.out.print("부서 코드 : ");
+		e.setDept_Code(sc.nextLine());
+		System.out.print("직책 코드 : ");
+		e.setJob_Code(sc.nextLine());
+		System.out.print("급여 등급 : ");
+		e.setSal_Level(sc.nextLine());
+		System.out.print("급여 : ");
+		e.setSalary(sc.nextInt());
+		System.out.print("보너스 : ");
+		e.setBonus(sc.nextDouble());
+		sc.nextLine();
+		System.out.print("관리자 사번 : ");
+		e.setManager_Id(sc.nextLine());
+		return e;
 	}
 }

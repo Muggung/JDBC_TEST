@@ -1,7 +1,9 @@
 package com.empmanager.model.service;
 
-import static com.empmanager.common.JDBCTemplete.getConnection;
 import static com.empmanager.common.JDBCTemplete.close;
+import static com.empmanager.common.JDBCTemplete.commit;
+import static com.empmanager.common.JDBCTemplete.getConnection;
+import static com.empmanager.common.JDBCTemplete.rollback;
 
 import java.sql.Connection;
 import java.util.List;
@@ -45,5 +47,14 @@ public class EmployeeService {
 		List<Employee> employee = dao.checkSalary(conn, maxSalary, minSalary);
 		close(conn);
 		return employee;
+	}
+	
+	public int insertEmployee(Employee employee) {
+		Connection conn = getConnection();
+		int result = dao.insertEmployee(conn, employee);
+		if(result > 0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
 	}
 }

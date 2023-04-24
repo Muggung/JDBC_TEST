@@ -57,7 +57,7 @@ public class Employee_Dao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, deptCode);
+			pstmt.setString(1, deptCode.toUpperCase());
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
@@ -80,7 +80,7 @@ public class Employee_Dao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, jobCode);
+			pstmt.setString(1, jobCode.toUpperCase());
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
@@ -139,6 +139,34 @@ public class Employee_Dao {
 			close(rs);
 			close(pstmt);
 		}return employee;
+	}
+	
+	public int insertEmployee(Connection conn, Employee employee) {
+		String sql = prop.getProperty("insertEmployee");
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, employee.getEmp_Id());
+			pstmt.setString(2, employee.getEmp_Name());
+			pstmt.setString(3, employee.getEmp_No());
+			pstmt.setString(4, employee.getEmail());
+			pstmt.setString(5, employee.getPhone());
+			pstmt.setString(6, employee.getDept_Code());
+			pstmt.setString(7, employee.getJob_Code());
+			pstmt.setString(8, employee.getSal_Level());
+			pstmt.setInt(9, employee.getSalary());
+			pstmt.setDouble(10, employee.getBonus());
+			pstmt.setString(11, employee.getManager_Id());
+			
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
 	}
 	
 	private Employee getEmployee(ResultSet rs) throws SQLException {
