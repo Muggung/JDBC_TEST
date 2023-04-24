@@ -4,18 +4,18 @@ import java.util.List;
 
 import com.empmanager.common.MainController;
 import com.empmanager.model.dto.Employee;
-import com.empmanager.model.service.Employee_Service;
+import com.empmanager.model.service.EmployeeService;
 import com.empmanager.view.MainView;
 
-public class Employee_Controller implements MainController{
-	private static Employee_Controller controller = new Employee_Controller();
-	private Employee_Controller(){};
-	public static Employee_Controller getController() {
+public class EmployeeController implements MainController{
+	private static EmployeeController controller = new EmployeeController();
+	private EmployeeController(){};
+	public static EmployeeController getController() {
 		return controller;
 	}
 	
 	MainView mv = new MainView();
-	Employee_Service service = new Employee_Service();
+	EmployeeService service = new EmployeeService();
 	
 	@Override
 	public void startProgram() {
@@ -29,8 +29,7 @@ public class Employee_Controller implements MainController{
 	}
 	@Override
 	public void checkEmployee() {
-		// TODO Auto-generated method stub
-		
+		mv.checkEmployeeMenu();
 	}
 	@Override
 	public void insertEmployee() {

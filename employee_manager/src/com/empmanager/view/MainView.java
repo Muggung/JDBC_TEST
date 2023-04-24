@@ -3,7 +3,8 @@ package com.empmanager.view;
 import java.util.List;
 import java.util.Scanner;
 
-import com.empmanager.controller.Employee_Controller;
+import com.empmanager.controller.EmployeeController;
+import com.empmanager.controller.EmployeeSubController;
 import com.empmanager.model.dto.Employee;
 
 public class MainView {
@@ -24,13 +25,13 @@ public class MainView {
 			int choice = sc.nextInt();
 			
 			switch(choice) {
-				case 1 : Employee_Controller.getController().checkAllEmployee(); break;
-				case 2 : Employee_Controller.getController().checkEmployee(); break;
-				case 3 : Employee_Controller.getController().insertEmployee(); break;
-				case 4 : Employee_Controller.getController().updateEmployee(); break;
-				case 5 : Employee_Controller.getController().deleteEmployee(); break;
-				case 6 : Employee_Controller.getController().departmentMenu(); break;
-				case 7 : Employee_Controller.getController().jobMenu(); break;
+				case 1 : EmployeeController.getController().checkAllEmployee(); break;
+				case 2 : EmployeeController.getController().checkEmployee(); break;
+				case 3 : EmployeeController.getController().insertEmployee(); break;
+				case 4 : EmployeeController.getController().updateEmployee(); break;
+				case 5 : EmployeeController.getController().deleteEmployee(); break;
+				case 6 : EmployeeController.getController().departmentMenu(); break;
+				case 7 : EmployeeController.getController().jobMenu(); break;
 				case 0 : System.out.println("===== 프로그램 종료 ====="); return;
 				default : System.out.println("메뉴에 있는 번호를 입력해주세요."); break;
 			}
@@ -41,5 +42,39 @@ public class MainView {
 		System.out.println("===== 사원 조회 =====");
 		employee.forEach(e -> System.out.println(e));
 		System.out.println("==================");
+	}
+	
+	public void checkEmployeeMenu() {
+		while(true) {
+			System.out.println("===== 사원 조회 메뉴 =====");
+			System.out.println("1. 부서 코드 조회");
+			System.out.println("2. 직책 코드 조회");
+			System.out.println("3. 사원 이름 조회");
+			System.out.println("4. 급여 범위 조회");
+			System.out.println("0. 메인 메뉴 돌아가기");
+			System.out.print("입력 : ");
+			int choice = sc.nextInt();
+			sc.nextLine();
+			
+			switch(choice) {
+				case 1 :
+					System.out.print("부서 코드 입력 : ");
+					EmployeeSubController.getSubController().checkDeptCode(sc.nextLine()); break;
+				case 2 : 
+					System.out.print("직책 코드 입력 : ");
+					EmployeeSubController.getSubController().checkJobCode(sc.nextLine()); break;
+				case 3 : 
+					System.out.print("사원 이름 입력 : ");
+					EmployeeSubController.getSubController().checkEmployeeName(sc.nextLine()); break;
+				case 4 : 
+					System.out.print("최대 급여 : ");
+					int maxSalary = sc.nextInt();
+					System.out.print("최소 급여 : ");
+					int minSalary = sc.nextInt();
+					EmployeeSubController.getSubController().checkSalary(maxSalary, minSalary); break;
+				case 0 : return;
+				default : System.out.println("메뉴에 있는 번호를 입력해주세요.");
+			}
+		}
 	}
 }

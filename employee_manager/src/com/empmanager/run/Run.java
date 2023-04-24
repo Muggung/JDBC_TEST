@@ -1,9 +1,9 @@
 package com.empmanager.run;
 
-import com.empmanager.controller.Employee_Controller;
+import com.empmanager.controller.EmployeeController;
 
 public class Run {
 	public static void main(String[] args) {
-		Employee_Controller.getController().startProgram();
+		EmployeeController.getController().startProgram();
 	}
 }

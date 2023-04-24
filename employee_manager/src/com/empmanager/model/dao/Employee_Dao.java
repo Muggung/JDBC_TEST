@@ -48,6 +48,99 @@ public class Employee_Dao {
 		}return employee;
 	}
 	
+	public List<Employee> checkDeptCode(Connection conn, String deptCode) {
+		String sql = prop.getProperty("checkDeptCode");
+		List<Employee> employee = new ArrayList<Employee>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, deptCode);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				employee.add(getEmployee(rs));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return employee;
+	}
+	
+	public List<Employee> checkJobCode(Connection conn, String jobCode) {
+		String sql = prop.getProperty("checkJobCode");
+		List<Employee> employee = new ArrayList<Employee>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, jobCode);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				employee.add(getEmployee(rs));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return employee;
+	}
+	
+	public List<Employee> checkEmployeeName(Connection conn, String name) {
+		String sql = prop.getProperty("checkEmployeeName");
+		List<Employee> employee = new ArrayList<Employee>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1,"%" + name + "%");
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				employee.add(getEmployee(rs));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return employee;
+	}
+	
+	public List<Employee> checkSalary(Connection conn, int maxSalary, int minSalary) {
+		String sql = prop.getProperty("checkSalary");
+		List<Employee> employee = new ArrayList<Employee>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, minSalary);
+			pstmt.setInt(2, maxSalary);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				employee.add(getEmployee(rs));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return employee;
+	}
+	
 	private Employee getEmployee(ResultSet rs) throws SQLException {
 		Employee e = new Employee();
 		e.setEmp_Id(rs.getString("EMP_ID"));
