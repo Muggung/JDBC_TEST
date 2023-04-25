@@ -34,20 +34,22 @@ public class EmployeeController implements MainController{
 	}
 	@Override
 	public void insertEmployee() {
-		Employee employee = null;
-		try {
-			employee = mv.insertEmployee();
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+		Employee employee = mv.insertEmployee();
 		int result = service.insertEmployee(employee);
 		mv.printMsg(result > 0 ? "등록성공 :)" : "등록실패 :(");
 	}
+	
 	@Override
 	public void updateEmployee() {
-		// TODO Auto-generated method stub
-		
+		String employeeId = mv.findEmployee("수정");
+		mv.updateEmployeeMenu(employeeId);
 	}
+	
+	@Override
+	public void findEmployeeId(String employeeId) {
+		service.findEmployeeId(employeeId);
+	}
+	
 	@Override
 	public void deleteEmployee() {
 		// TODO Auto-generated method stub

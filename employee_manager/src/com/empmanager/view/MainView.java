@@ -10,6 +10,10 @@ import com.empmanager.controller.EmployeeController;
 import com.empmanager.controller.EmployeeSubController;
 import com.empmanager.model.dto.Employee;
 
+import static com.empmanager.controller.EmployeeController.getController;
+import static com.empmanager.controller.EmployeeSubController.getSubController;
+import static com.empmanager.controller.UpdateEmployeeController.getUpdateController;
+
 public class MainView {
 	Scanner sc = new Scanner(System.in);
 	
@@ -19,7 +23,7 @@ public class MainView {
 			System.out.println("1. 전체 사원 조회");
 			System.out.println("2. 사원 조회 (부서, 직책, 이름, 급여)");
 			System.out.println("3. 사원 등록");
-			System.out.println("4. 사원 수정 (직책, 부서, 급여, 전화번호, 이메일)");
+			System.out.println("4. 사원 수정 (부서, 직책, 급여, 전화번호, 이메일)");
 			System.out.println("5. 사원 삭제");
 			System.out.println("6. 부서 관리 메뉴");
 			System.out.println("7. 직책 관리 메뉴");
@@ -28,13 +32,13 @@ public class MainView {
 			int choice = sc.nextInt();
 			
 			switch(choice) {
-				case 1 : EmployeeController.getController().checkAllEmployee(); break;
-				case 2 : EmployeeController.getController().checkEmployee(); break;
-				case 3 : EmployeeController.getController().insertEmployee(); break;
-				case 4 : EmployeeController.getController().updateEmployee(); break;
-				case 5 : EmployeeController.getController().deleteEmployee(); break;
-				case 6 : EmployeeController.getController().departmentMenu(); break;
-				case 7 : EmployeeController.getController().jobMenu(); break;
+				case 1 : getController().checkAllEmployee(); break;
+				case 2 : getController().checkEmployee(); break;
+				case 3 : getController().insertEmployee(); break;
+				case 4 : getController().updateEmployee(); break;
+				case 5 : getController().deleteEmployee(); break;
+				case 6 : getController().departmentMenu(); break;
+				case 7 : getController().jobMenu(); break;
 				case 0 : System.out.println("===== 프로그램 종료 ====="); return;
 				default : System.out.println("메뉴에 있는 번호를 입력해주세요."); break;
 			}
@@ -71,26 +75,26 @@ public class MainView {
 			switch(choice) {
 				case 1 :
 					System.out.print("부서 코드 입력 : ");
-					EmployeeSubController.getSubController().checkDeptCode(sc.nextLine()); break;
+					getSubController().checkDeptCode(sc.nextLine()); break;
 				case 2 : 
 					System.out.print("직책 코드 입력 : ");
-					EmployeeSubController.getSubController().checkJobCode(sc.nextLine()); break;
+					getSubController().checkJobCode(sc.nextLine()); break;
 				case 3 : 
 					System.out.print("사원 이름 입력 : ");
-					EmployeeSubController.getSubController().checkEmployeeName(sc.nextLine()); break;
+					getSubController().checkEmployeeName(sc.nextLine()); break;
 				case 4 : 
 					System.out.print("최대 급여 : ");
 					int maxSalary = sc.nextInt();
 					System.out.print("최소 급여 : ");
 					int minSalary = sc.nextInt();
-					EmployeeSubController.getSubController().checkSalary(maxSalary, minSalary); break;
+					getSubController().checkSalary(maxSalary, minSalary); break;
 				case 0 : return;
 				default : System.out.println("메뉴에 있는 번호를 입력해주세요.");
 			}
 		}
 	}
 	
-	public Employee insertEmployee() throws ParseException{
+	public Employee insertEmployee(){
 		Employee e = new Employee();
 		
 		System.out.println("===== 사원 등록 =====");
@@ -119,5 +123,39 @@ public class MainView {
 		System.out.print("관리자 사번 : ");
 		e.setManager_Id(sc.nextLine());
 		return e;
+	}
+	
+	public String findEmployee(String menuName) {
+		System.out.println("===== " + menuName + "할 사원 아이디 입력 =====");
+		System.out.print("사원 아이디 입력 : ");
+		String empId = sc.next();
+		System.out.println("======================================");
+		return empId;
+	}
+	
+	public void updateEmployeeMenu(String employeeId) {
+		getController().findEmployeeId(employeeId);
+		
+		while(true) {
+			System.out.println("===== 사원 정보 수정 =====");
+			System.out.println("1. 부서 수정");
+			System.out.println("2. 직책 수정");
+			System.out.println("3. 급여 수정");
+			System.out.println("4. 전화번호 수정");
+			System.out.println("5. 이메일 수정");
+			System.out.println("0. 메인 메뉴 돌아가기");
+			System.out.print("입력 : ");
+			int choice = sc.nextInt();
+			
+			switch(choice) {
+				case 1 :
+				case 2 :
+				case 3 :
+				case 4 :
+				case 5 :
+				case 0 :
+				default :
+			}
+		}
 	}
 }

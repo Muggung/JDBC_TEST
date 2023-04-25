@@ -57,4 +57,12 @@ public class EmployeeService {
 		close(conn);
 		return result;
 	}
+	
+	public boolean findEmployeeId(String employeeId) {
+		Connection conn = getConnection();
+		Employee employee = dao.findEmployeeId(conn, employeeId);
+		if(employee == null) return false;
+		else return true;
+		close(conn);
+	}
 }
