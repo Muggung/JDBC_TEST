@@ -1,13 +1,8 @@
 package com.empmanager.view;
 
-import java.sql.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Scanner;
 
-import com.empmanager.controller.EmployeeController;
-import com.empmanager.controller.EmployeeSubController;
 import com.empmanager.model.dto.Employee;
 
 import static com.empmanager.controller.EmployeeController.getController;
@@ -129,32 +124,45 @@ public class MainView {
 		System.out.println("===== " + menuName + "할 사원 아이디 입력 =====");
 		System.out.print("사원 아이디 입력 : ");
 		String empId = sc.next();
-		System.out.println("======================================");
 		return empId;
 	}
 	
-	public void updateEmployeeMenu(String employeeId) {
-		getController().findEmployeeId(employeeId);
+	public void updateEmployeeMenu(Employee e) {
+		if(e == null) {
+			System.out.println("조회된 회원이 없습니다.");
+			return;
+		}
 		
 		while(true) {
-			System.out.println("===== 사원 정보 수정 =====");
-			System.out.println("1. 부서 수정");
-			System.out.println("2. 직책 수정");
-			System.out.println("3. 급여 수정");
+			System.out.println("===== "+ e.getEmp_Id() + " " + e.getEmp_Name() + "님 사원 정보 수정 =====");
+			System.out.println("1. 부서 코드 수정");
+			System.out.println("2. 직책 코드 수정");
+			System.out.println("3. 급여 금액 수정");
 			System.out.println("4. 전화번호 수정");
-			System.out.println("5. 이메일 수정");
+			System.out.println("5. 이메일 주소 수정");
 			System.out.println("0. 메인 메뉴 돌아가기");
 			System.out.print("입력 : ");
 			int choice = sc.nextInt();
+			sc.nextLine();
 			
 			switch(choice) {
 				case 1 :
+					System.out.println("수정할 부서 코드 : ");
+					getUpdateController().updateDeptCode(e.getEmp_Id(), sc.nextLine()); break;
 				case 2 :
-				case 3 :
-				case 4 :
-				case 5 :
-				case 0 :
-				default :
+					System.out.println("수정할 직책 코드 : ");
+					getUpdateController().updateJobCode(e.getEmp_Id(), sc.nextLine()); break;
+				case 3 : 
+					System.out.println("수정할 급여 금액 : ");
+					getUpdateController().updateSalary(e.getEmp_Id(), sc.nextInt()); break;
+				case 4 : 
+					System.out.println("수정할 전화번호 : ");
+					getUpdateController().updatePhone(e.getEmp_Id(), sc.nextLine()); break;
+				case 5 : 
+					System.out.println("수정할 이메일 주소 : ");
+					getUpdateController().updateEmail(e.getEmp_Id(), sc.nextLine()); break;
+				case 0 : return;
+				default : System.out.println("메뉴에 있는 번호를 입력해주세요."); break;
 			}
 		}
 	}

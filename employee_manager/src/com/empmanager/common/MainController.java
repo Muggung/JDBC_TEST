@@ -7,7 +7,6 @@ public interface MainController {
 	void checkEmployee();
 	void insertEmployee();
 	void updateEmployee();
-	void findEmployeeId(String employeeId);
 	void deleteEmployee();
 	void departmentMenu();
 	void jobMenu();

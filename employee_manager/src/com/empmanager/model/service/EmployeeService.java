@@ -58,11 +58,19 @@ public class EmployeeService {
 		return result;
 	}
 	
-	public boolean findEmployeeId(String employeeId) {
+	public Employee findEmployeeId(String employeeId) {
 		Connection conn = getConnection();
 		Employee employee = dao.findEmployeeId(conn, employeeId);
-		if(employee == null) return false;
-		else return true;
 		close(conn);
+		return employee;
+	}
+	
+	public int updateDeptCode(String employeeId, String deptCode) {
+		Connection conn = getConnection();
+		int result = dao.updateDeptCode(conn, employeeId, deptCode);
+		if(result > 0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
 	}
 }

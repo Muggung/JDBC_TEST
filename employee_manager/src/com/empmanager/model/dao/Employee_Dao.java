@@ -169,6 +169,47 @@ public class Employee_Dao {
 		}return result;
 	}
 	
+	public Employee findEmployeeId(Connection conn, String id) {
+		String sql = prop.getProperty("findEmployeeId");
+		Employee employee = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) employee = getEmployee(rs);
+			else return employee;
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return employee;
+	}
+	
+	public int updateDeptCode(Connection conn, String employeeId, String deptCode) {
+		String sql = prop.getProperty("updateDeptCode");
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, deptCode);
+			pstmt.setString(2, employeeId);
+			
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
+	
 	private Employee getEmployee(ResultSet rs) throws SQLException {
 		Employee e = new Employee();
 		e.setEmp_Id(rs.getString("EMP_ID"));

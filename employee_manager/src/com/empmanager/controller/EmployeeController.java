@@ -42,12 +42,10 @@ public class EmployeeController implements MainController{
 	@Override
 	public void updateEmployee() {
 		String employeeId = mv.findEmployee("수정");
-		mv.updateEmployeeMenu(employeeId);
-	}
-	
-	@Override
-	public void findEmployeeId(String employeeId) {
-		service.findEmployeeId(employeeId);
+		
+		Employee employee = service.findEmployeeId(employeeId);
+		
+		mv.updateEmployeeMenu(employee);
 	}
 	
 	@Override
