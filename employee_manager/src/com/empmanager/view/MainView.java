@@ -139,7 +139,7 @@ public class MainView {
 			System.out.println("2. 직책 코드 수정");
 			System.out.println("3. 급여 금액 수정");
 			System.out.println("4. 전화번호 수정");
-			System.out.println("5. 이메일 주소 수정");
+			System.out.println("5. 이메일 수정");
 			System.out.println("0. 메인 메뉴 돌아가기");
 			System.out.print("입력 : ");
 			int choice = sc.nextInt();
