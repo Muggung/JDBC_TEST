@@ -82,4 +82,31 @@ public class EmployeeService {
 		close(conn);
 		return result;
 	}
+	
+	public int updateSalary(String employeeId, int salary) {
+		Connection conn = getConnection();
+		int result = dao.updateSalary(conn, employeeId, salary);
+		if(result > 0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	
+	public int updatePhoneNum(String employeeId, String phoneNum) {
+		Connection conn = getConnection();
+		int result = dao.updatePhoneNum(conn, employeeId, phoneNum);
+		if(result > 0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	
+	public int updateEmail(String employeeId, String email) {
+		Connection conn = getConnection();
+		int result = dao.updateEmail(conn, employeeId, email);
+		if(result > 0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
 }

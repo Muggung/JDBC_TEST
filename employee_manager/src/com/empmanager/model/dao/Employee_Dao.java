@@ -229,6 +229,63 @@ public class Employee_Dao {
 		}return result;
 	}
 	
+	public int updateSalary(Connection conn, String employeeId, int salary) {
+		String sql = prop.getProperty("updateSalary");
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, salary);
+			pstmt.setString(2, employeeId);
+			
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
+	
+	public int updatePhoneNum(Connection conn, String employeeId, String phoneNum) {
+		String sql = prop.getProperty("updatePhoneNum");
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, phoneNum);
+			pstmt.setString(2, employeeId);
+			
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
+	
+	public int updateEmail(Connection conn, String employeeId, String email) {
+		String sql = prop.getProperty("updateEmail");
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, email);
+			pstmt.setString(2, employeeId);
+			
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
+	
 	private Employee getEmployee(ResultSet rs) throws SQLException {
 		Employee e = new Employee();
 		e.setEmp_Id(rs.getString("EMP_ID"));

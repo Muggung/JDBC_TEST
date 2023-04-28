@@ -28,18 +28,21 @@ public class UpdateEmployeeController implements UpdateController{
 	}
 	@Override
 	public void updateSalary(String employeeId, int salary) {
-		// TODO Auto-generated method stub
+		int result = service.updateSalary(employeeId, salary);
 		
+		mv.printMsg(result > 0 ? "수정 성공 :)" : "수정 실패 :(");
 	}
 	@Override
-	public void updatePhone(String employeeId, String phone) {
-		// TODO Auto-generated method stub
+	public void updatePhoneNum(String employeeId, String phoneNum) {
+		int result = service.updatePhoneNum(employeeId, phoneNum);
 		
+		mv.printMsg(result > 0 ? "수정 성공 :)" : "수정 실패 :(");
 	}
 	@Override
 	public void updateEmail(String employeeId, String email) {
-		// TODO Auto-generated method stub
+		int result = service.updateEmail(employeeId, email);
 		
+		mv.printMsg(result > 0 ? "수정 성공 :)" : "수정 실패 :(");
 	}
 	
 

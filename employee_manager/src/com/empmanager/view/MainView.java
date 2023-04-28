@@ -157,7 +157,7 @@ public class MainView {
 					getUpdateController().updateSalary(e.getEmp_Id(), sc.nextInt()); break;
 				case 4 : 
 					System.out.print("수정할 전화번호 : ");
-					getUpdateController().updatePhone(e.getEmp_Id(), sc.nextLine()); break;
+					getUpdateController().updatePhoneNum(e.getEmp_Id(), sc.nextLine()); break;
 				case 5 : 
 					System.out.print("수정할 이메일 주소 : ");
 					getUpdateController().updateEmail(e.getEmp_Id(), sc.nextLine()); break;
