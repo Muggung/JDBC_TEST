@@ -45,7 +45,7 @@ public class MainView {
 		System.out.println(msg);
 	}
 	
-	public void printEmployee(List<Employee> employee) {
+	public void printEmployeeMenu(List<Employee> employee) {
 		System.out.println("===== 사원 조회 =====");
 		if(employee.isEmpty()) {
 			System.out.println("===== 조회된 사원이 없습니다 :( =====");
@@ -89,7 +89,7 @@ public class MainView {
 		}
 	}
 	
-	public Employee insertEmployee(){
+	public Employee insertEmployeeMenu(){
 		Employee e = new Employee();
 		
 		System.out.println("===== 사원 등록 =====");
@@ -120,7 +120,7 @@ public class MainView {
 		return e;
 	}
 	
-	public String findEmployee(String menuName) {
+	public String findEmployeeMenu(String menuName) {
 		System.out.println("===== " + menuName + "할 사원 아이디 입력 =====");
 		System.out.print("사원 아이디 입력 : ");
 		String empId = sc.next();
@@ -165,5 +165,20 @@ public class MainView {
 				default : System.out.println("메뉴에 있는 번호를 입력해주세요."); break;
 			}
 		}
+	}
+	
+	public char deleteEmployeeMenu(Employee e) {
+		System.out.println("===== 삭제 메뉴 =====");
+		char choice = ' ';
+		while(true) {
+			System.out.println("사원번호 " + e.getEmp_Id() + "번 " + e.getEmp_Name() + "님의 정보를 정말 삭제합니까??");
+			System.out.print("입력(Y/N) : ");
+			choice = sc.next().charAt(0);
+			
+			if(choice == 'Y' || choice == 'y' || choice == 'N' || choice == 'n') {
+				break;
+			}
+			System.out.println("Y 또는 N을 입력해주세요.");
+		} return choice;
 	}
 }

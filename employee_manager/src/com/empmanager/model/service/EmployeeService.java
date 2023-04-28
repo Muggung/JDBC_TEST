@@ -109,4 +109,12 @@ public class EmployeeService {
 		close(conn);
 		return result;
 	}
+	
+	public int deleteEmployee(String employeeId) {
+		Connection conn = getConnection();
+		int result = dao.deleteEmployee(conn, employeeId);
+		if(result > 0) commit(conn);
+		else rollback(conn);
+		return result;
+	}
 }

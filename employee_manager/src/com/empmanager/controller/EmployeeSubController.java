@@ -20,21 +20,21 @@ public class EmployeeSubController implements SubController{
 	@Override
 	public void checkDeptCode(String deptCode) {
 		List<Employee> employee = service.checkDeptCode(deptCode);
-		mv.printEmployee(employee);
+		mv.printEmployeeMenu(employee);
 	}
 	@Override
 	public void checkJobCode(String jobCode) {
 		List<Employee> employee = service.checkJobCode(jobCode);
-		mv.printEmployee(employee);
+		mv.printEmployeeMenu(employee);
 	}
 	@Override
 	public void checkEmployeeName(String name) {
 		List<Employee> employee = service.checkEmployeeName(name);
-		mv.printEmployee(employee);
+		mv.printEmployeeMenu(employee);
 	}
 	@Override
 	public void checkSalary(int maxSalary, int minSalary) {
 		List<Employee> employee = service.checkSalary(maxSalary, minSalary);
-		mv.printEmployee(employee);
+		mv.printEmployeeMenu(employee);
 	}
 }

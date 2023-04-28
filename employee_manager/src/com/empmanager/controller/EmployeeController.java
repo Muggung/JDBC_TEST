@@ -26,7 +26,7 @@ public class EmployeeController implements MainController{
 	@Override
 	public void checkAllEmployee() {
 		List<Employee> employee = service.checkAllEmployee();
-		mv.printEmployee(employee);
+		mv.printEmployeeMenu(employee);
 	}
 	@Override
 	public void checkEmployee() {
@@ -34,14 +34,14 @@ public class EmployeeController implements MainController{
 	}
 	@Override
 	public void insertEmployee() {
-		Employee employee = mv.insertEmployee();
+		Employee employee = mv.insertEmployeeMenu();
 		int result = service.insertEmployee(employee);
 		mv.printMsg(result > 0 ? "등록성공 :)" : "등록실패 :(");
 	}
 	
 	@Override
 	public void updateEmployee() {
-		String employeeId = mv.findEmployee("수정");
+		String employeeId = mv.findEmployeeMenu("수정");
 		
 		Employee employee = service.findEmployeeId(employeeId);
 		
@@ -50,8 +50,18 @@ public class EmployeeController implements MainController{
 	
 	@Override
 	public void deleteEmployee() {
-		// TODO Auto-generated method stub
+		String employeeId = mv.findEmployeeMenu("삭제");
 		
+		Employee employee = service.findEmployeeId(employeeId);
+		
+		char choice = mv.deleteEmployeeMenu(employee);
+		
+		if(choice == 'Y' || choice == 'y') {
+			service.deleteEmployee(employeeId);
+			mv.printMsg("삭제성공");
+		} else if(choice == 'N' || choice == 'n') {
+			mv.printMsg("===== 메인메뉴로 돌아갑니다. ======");
+		}
 	}
 	@Override
 	public void departmentMenu() {

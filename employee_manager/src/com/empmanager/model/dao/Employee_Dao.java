@@ -286,6 +286,24 @@ public class Employee_Dao {
 		}return result;
 	}
 	
+	public int deleteEmployee(Connection conn, String employeeId) {
+		String sql = prop.getProperty("deleteEmployee");
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, employeeId);
+			
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
+	
 	private Employee getEmployee(ResultSet rs) throws SQLException {
 		Employee e = new Employee();
 		e.setEmp_Id(rs.getString("EMP_ID"));
