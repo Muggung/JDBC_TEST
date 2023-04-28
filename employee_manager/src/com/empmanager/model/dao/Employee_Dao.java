@@ -210,6 +210,25 @@ public class Employee_Dao {
 		}return result;
 	}
 	
+	public int updateJobCode(Connection conn, String employeeId, String jobCode) {
+		String sql = prop.getProperty("updateJobCode");
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, jobCode);
+			pstmt.setString(2, employeeId);
+			
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
+	
 	private Employee getEmployee(ResultSet rs) throws SQLException {
 		Employee e = new Employee();
 		e.setEmp_Id(rs.getString("EMP_ID"));

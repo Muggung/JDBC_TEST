@@ -73,4 +73,13 @@ public class EmployeeService {
 		close(conn);
 		return result;
 	}
+	
+	public int updateJobCode(String employeeId, String jobCode) {
+		Connection conn = getConnection();
+		int result = dao.updateJobCode(conn, employeeId, jobCode);
+		if(result > 0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
 }

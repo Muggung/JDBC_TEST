@@ -147,19 +147,19 @@ public class MainView {
 			
 			switch(choice) {
 				case 1 :
-					System.out.println("수정할 부서 코드 : ");
+					System.out.print("수정할 부서 코드 : ");
 					getUpdateController().updateDeptCode(e.getEmp_Id(), sc.nextLine()); break;
 				case 2 :
-					System.out.println("수정할 직책 코드 : ");
+					System.out.print("수정할 직책 코드 : ");
 					getUpdateController().updateJobCode(e.getEmp_Id(), sc.nextLine()); break;
 				case 3 : 
-					System.out.println("수정할 급여 금액 : ");
+					System.out.print("수정할 급여 금액 : ");
 					getUpdateController().updateSalary(e.getEmp_Id(), sc.nextInt()); break;
 				case 4 : 
-					System.out.println("수정할 전화번호 : ");
+					System.out.print("수정할 전화번호 : ");
 					getUpdateController().updatePhone(e.getEmp_Id(), sc.nextLine()); break;
 				case 5 : 
-					System.out.println("수정할 이메일 주소 : ");
+					System.out.print("수정할 이메일 주소 : ");
 					getUpdateController().updateEmail(e.getEmp_Id(), sc.nextLine()); break;
 				case 0 : return;
 				default : System.out.println("메뉴에 있는 번호를 입력해주세요."); break;
