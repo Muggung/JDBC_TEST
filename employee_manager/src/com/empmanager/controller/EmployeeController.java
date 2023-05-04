@@ -28,10 +28,12 @@ public class EmployeeController implements MainController{
 		List<Employee> employee = service.checkAllEmployee();
 		mv.printEmployeeMenu(employee);
 	}
+	
 	@Override
 	public void checkEmployee() {
 		mv.checkEmployeeMenu();
 	}
+	
 	@Override
 	public void insertEmployee() {
 		Employee employee = mv.insertEmployeeMenu();
@@ -65,7 +67,7 @@ public class EmployeeController implements MainController{
 	}
 	@Override
 	public void departmentMenu() {
-		// TODO Auto-generated method stub
+		mv.departmentMenu();
 		
 	}
 	@Override

@@ -35,9 +35,9 @@ public class EmployeeService {
 		return employee;
 	}
 	
-	public List<Employee> checkEmployeeName(String name) {
+	public List<Employee> checkEmployeeName(String employeeName) {
 		Connection conn = getConnection();
-		List<Employee> employee = dao.checkEmployeeName(conn, name);
+		List<Employee> employee = dao.checkEmployeeName(conn, employeeName);
 		close(conn);
 		return employee;
 	}
@@ -113,6 +113,14 @@ public class EmployeeService {
 	public int deleteEmployee(String employeeId) {
 		Connection conn = getConnection();
 		int result = dao.deleteEmployee(conn, employeeId);
+		if(result > 0) commit(conn);
+		else rollback(conn);
+		return result;
+	}
+	
+	public int insertDepartment(String deptId, String deptTitle, String locationCode) {
+		Connection conn = getConnection();
+		int result = dao.insertDepartment(conn, deptId, deptTitle, locationCode);
 		if(result > 0) commit(conn);
 		else rollback(conn);
 		return result;

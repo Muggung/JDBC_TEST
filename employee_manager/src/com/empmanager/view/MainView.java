@@ -1,13 +1,14 @@
 package com.empmanager.view;
 
+import static com.empmanager.controller.EmployeeController.getController;
+import static com.empmanager.controller.EmployeeSubController.getSubController;
+import static com.empmanager.controller.UpdateEmployeeController.getUpdateController;
+import static com.empmanager.controller.DepartmentController.getDepartmentController;
+
 import java.util.List;
 import java.util.Scanner;
 
 import com.empmanager.model.dto.Employee;
-
-import static com.empmanager.controller.EmployeeController.getController;
-import static com.empmanager.controller.EmployeeSubController.getSubController;
-import static com.empmanager.controller.UpdateEmployeeController.getUpdateController;
 
 public class MainView {
 	Scanner sc = new Scanner(System.in);
@@ -40,9 +41,9 @@ public class MainView {
 		}
 	}
 	
-	public void printMsg(String msg) {
+	public void printMsg(String systemMessege) {
 		System.out.println("===== 시스템 메세지 =====");
-		System.out.println(msg);
+		System.out.println(systemMessege);
 	}
 	
 	public void printEmployeeMenu(List<Employee> employee) {
@@ -123,18 +124,17 @@ public class MainView {
 	public String findEmployeeMenu(String menuName) {
 		System.out.println("===== " + menuName + "할 사원 아이디 입력 =====");
 		System.out.print("사원 아이디 입력 : ");
-		String empId = sc.next();
-		return empId;
+		return sc.next();
 	}
 	
-	public void updateEmployeeMenu(Employee e) {
-		if(e == null) {
+	public void updateEmployeeMenu(Employee employee) {
+		if(employee == null) {
 			System.out.println("조회된 회원이 없습니다.");
 			return;
 		}
 		
 		while(true) {
-			System.out.println("===== "+ e.getEmp_Id() + " " + e.getEmp_Name() + "님 사원 정보 수정 =====");
+			System.out.println("===== "+ employee.getEmp_Id() + " " + employee.getEmp_Name() + "님 사원 정보 수정 =====");
 			System.out.println("1. 부서 코드 수정");
 			System.out.println("2. 직책 코드 수정");
 			System.out.println("3. 급여 금액 수정");
@@ -148,30 +148,30 @@ public class MainView {
 			switch(choice) {
 				case 1 :
 					System.out.print("수정할 부서 코드 : ");
-					getUpdateController().updateDeptCode(e.getEmp_Id(), sc.nextLine()); break;
+					getUpdateController().updateDeptCode(employee.getEmp_Id(), sc.nextLine()); break;
 				case 2 :
 					System.out.print("수정할 직책 코드 : ");
-					getUpdateController().updateJobCode(e.getEmp_Id(), sc.nextLine()); break;
+					getUpdateController().updateJobCode(employee.getEmp_Id(), sc.nextLine()); break;
 				case 3 : 
 					System.out.print("수정할 급여 금액 : ");
-					getUpdateController().updateSalary(e.getEmp_Id(), sc.nextInt()); break;
+					getUpdateController().updateSalary(employee.getEmp_Id(), sc.nextInt()); break;
 				case 4 : 
 					System.out.print("수정할 전화번호 : ");
-					getUpdateController().updatePhoneNum(e.getEmp_Id(), sc.nextLine()); break;
+					getUpdateController().updatePhoneNum(employee.getEmp_Id(), sc.nextLine()); break;
 				case 5 : 
 					System.out.print("수정할 이메일 주소 : ");
-					getUpdateController().updateEmail(e.getEmp_Id(), sc.nextLine()); break;
+					getUpdateController().updateEmail(employee.getEmp_Id(), sc.nextLine()); break;
 				case 0 : return;
 				default : System.out.println("메뉴에 있는 번호를 입력해주세요."); break;
 			}
 		}
 	}
 	
-	public char deleteEmployeeMenu(Employee e) {
+	public char deleteEmployeeMenu(Employee employee) {
 		System.out.println("===== 삭제 메뉴 =====");
 		char choice = ' ';
 		while(true) {
-			System.out.println("사원번호 " + e.getEmp_Id() + "번 " + e.getEmp_Name() + "님의 정보를 정말 삭제합니까??");
+			System.out.println("사원번호 " + employee.getEmp_Id() + "번 " + employee.getEmp_Name() + "님의 정보를 정말 삭제합니까??");
 			System.out.print("입력(Y/N) : ");
 			choice = sc.next().charAt(0);
 			
@@ -180,5 +180,39 @@ public class MainView {
 			}
 			System.out.println("Y 또는 N을 입력해주세요.");
 		} return choice;
+	}
+	
+	public void departmentMenu() {
+		String deptCode = null;
+		String deptTitle = null;
+		
+		while(true) {
+			System.out.println("===== 부서관리 메뉴 =====");
+			System.out.println("1. 부서 등록");
+			System.out.println("2. 부서 수정");
+			System.out.println("3. 부서 삭제");
+			System.out.println("0. 메인메뉴로 돌아가기");
+			System.out.print("입력 : ");
+			int choice = sc.nextInt();
+			
+			switch(choice) {
+				case 1 :
+					System.out.print("등록할 부서 코드 : ");
+					deptCode = sc.next();
+					System.out.print("등록할 부서의 부서명 : ");
+					sc.nextLine();
+					deptTitle = sc.nextLine();
+					System.out.print("등록할 부서의 지역코드 : ");
+					String locationCode = sc.next();
+					getDepartmentController().insertDepartment(deptCode, deptTitle, locationCode); break;
+				case 2 : System.out.println("개발 중"); break;
+//					System.out.println("수정할 부서코드 : ");
+//					deptCode = sc.next();
+//					getDepartmentController().UpdateDepartment(deptCode); break;
+				case 3 : System.out.println("개발 중"); break;
+				case 0 : return;
+					
+			}
+		}
 	}
 }

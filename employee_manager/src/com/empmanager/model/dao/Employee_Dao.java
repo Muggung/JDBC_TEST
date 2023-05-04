@@ -94,7 +94,7 @@ public class Employee_Dao {
 		}return employee;
 	}
 	
-	public List<Employee> checkEmployeeName(Connection conn, String name) {
+	public List<Employee> checkEmployeeName(Connection conn, String employeeName) {
 		String sql = prop.getProperty("checkEmployeeName");
 		List<Employee> employee = new ArrayList<Employee>();
 		
@@ -103,7 +103,7 @@ public class Employee_Dao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1,"%" + name + "%");
+			pstmt.setString(1,"%" + employeeName + "%");
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
@@ -169,7 +169,7 @@ public class Employee_Dao {
 		}return result;
 	}
 	
-	public Employee findEmployeeId(Connection conn, String id) {
+	public Employee findEmployeeId(Connection conn, String employeeId) {
 		String sql = prop.getProperty("findEmployeeId");
 		Employee employee = null;
 		
@@ -178,7 +178,7 @@ public class Employee_Dao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, id);
+			pstmt.setString(1, employeeId);
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) employee = getEmployee(rs);
@@ -295,6 +295,26 @@ public class Employee_Dao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, employeeId);
+			
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
+	
+	public int insertDepartment(Connection conn, String deptId, String deptTitle, String locationCode) {
+		String sql = prop.getProperty("insertDepartment");
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, deptId);
+			pstmt.setString(2, deptTitle);
+			pstmt.setString(3, locationCode);
 			
 			result = pstmt.executeUpdate();
 		}catch(SQLException e) {
